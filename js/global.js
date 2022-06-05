@@ -158,6 +158,7 @@ function loadDistrict(id) {
             let option = document.createElement('option');
             option.value = data.id;
             option.text = data.name;
+            districtSelect.innerHTML = "";
             districtSelect.appendChild(option);
         }
     }
