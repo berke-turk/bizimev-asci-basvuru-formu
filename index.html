@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Bizimev'de aşçı olmak için başvur!">
+    <meta name="author" content="Bizimev">
+    <meta name="keywords" content="Bizimev register, Bizimev aşçı başvurusu, Bizimev başvuru">
+
+    <!-- Title Page-->
+    <title>Bizimev Başvuru</title>
+
+    <!-- Icons font CSS-->
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="css/main.css" rel="stylesheet" media="all">
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-02 p-t-100 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <img src="https://www.bizimev.app/static/src/img/logo.svg" alt="">
+                    <h2 class="title">Aşçı kayıt formu</h2>
+                    <form method="POST">
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Adı</label>
+                                    <input class="input--style-4" id="name" type="text" name="name" required>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Soyadı</label>
+                                    <input class="input--style-4" id="surname" type="text" name="surname" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Doğum Tarihi</label>
+                                    <div class="input-group-icon">
+                                        <input class="input--style-4 js-datepicker" id="birthday" type="text" name="birthday" required>
+                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Cinsiyet</label>
+                                    <div class="p-t-10">
+                                        <label class="radio-container m-r-45">Erkek
+                                            <input type="radio" id="genderMale" value="0" checked="checked" name="gender">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="radio-container">Kadın
+                                            <input type="radio" id="genderFeMale" value="1" name="gender">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Email</label>
+                                    <input class="input--style-4" id="email" type="email" name="email" required>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Telefon</label>
+                                    <input class="input--style-4" id="phone" type="text" name="phone" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="label">İl</label>
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <select id="citySelect" name="city" required>
+                                    <option disabled="disabled">Seç</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="label">İlçe</label>
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <select id="districtSelect" name="district" required>
+                                    <option disabled="disabled">Seç</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="label">Açıklama</label>
+                            <input class="input--style-4" type="text" id="description" name="description" required>
+                        </div>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2" id="submitButton" style="background-color: #c41123;" type="submit">Başvuru yap</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+    <script>
+        $("#submitButton").on('click', function(event) {
+            let gender = 0;
+            if (document.getElementById('genderFeMale').checked)
+                gender = 1;
+
+            let formData = {
+                firstName: $("#name").val(),
+                lastName: $("#surname").val(),
+                birthday: $("#birthday").val(),
+                gender: gender,
+                emailAddress: $("#email").val(),
+                phone: $("#phone").val(),
+                cityId: parseInt($("#citySelect").val()),
+                townId: parseInt($("#districtSelect").val()),
+                description: $("#description").val()
+            };
+
+            console.log("------");
+            console.log(formData);
+            console.log("------");
+
+            $.ajax({
+                type: "POST",
+                url: "https://test.bizimevapi.com/enrollment",
+                data: formData,
+                dataType: "json",
+                encode: true,
+            }).done(function(data) {
+                console.log(data);
+            });
+
+            event.preventDefault();
+
+            console.log("Gönderildi");
+        });
+    </script>
+
+</body>
+
+</html>
+<!-- end document-->
