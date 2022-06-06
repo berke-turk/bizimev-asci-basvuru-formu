@@ -33,7 +33,7 @@
                 <div class="card-body">
                     <img src="https://www.bizimev.app/static/src/img/logo.svg" alt="">
                     <h2 class="title">Aşçı kayıt formu</h2>
-                    <form method="POST">
+                    <form id="formS" method="POST">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -132,6 +132,8 @@
             let gender = 0;
             if (document.getElementById('genderFeMale').checked)
                 gender = 1;
+            let formS = document.getElementById("formS");
+            let titleS = document.getElementById("titleS");
 
             let formData = {
                 firstName: $("#name").val(),
@@ -159,6 +161,11 @@
                 },
             }).done(function(data) {
                 console.log(data);
+                if (data.success) {
+
+                    formS.remove();
+                    titleS.textContent = "Başvurunuz gerçekleşti! Onaylandığınızda sms yoluyla tarafınıza bildirilecektir.";
+                }
             }).fail(function(data) {
                 console.log(data);
             });
