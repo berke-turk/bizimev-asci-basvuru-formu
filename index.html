@@ -155,8 +155,7 @@
                 data: JSON.stringify(formData),
                 processData: false,
                 headers: {
-                    "content-type": "text/plain;charset=UTF-8" // Add this line
-                        // "content-type": "application/json;charset=UTF-8" // Or add this line
+                    'content-type': "application/json" // Or add this line
                 },
             }).done(function(data) {
                 console.log(data);
