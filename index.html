@@ -150,11 +150,12 @@
             console.log("------");
 
             $.ajax({
-                type: "POST",
-                url: "https://test.bizimevapi.com/enrollment",
-                data: formData,
-                dataType: "json",
-                encode: true,
+                'type': "POST",
+                'url': "https://test.bizimevapi.com/enrollment",
+                'data': JSON.stringify(formData),
+                'dataType': "json",
+                'processData': false,
+                'contentType': 'application/json'
             }).done(function(data) {
                 console.log(data);
             }).fail(function(data) {
